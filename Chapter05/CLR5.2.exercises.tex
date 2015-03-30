@@ -1,0 +1,183 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{ amssymb }
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{color}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+ \usepackage{tikz}
+ \usepackage{enumitem}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\begin{document}
+
+\noindent{
+\framebox {
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+\vspace{2mm}
+1. Prove that the subset relation $\subseteq$ on all subsets of $\mathbb{Z}$ is a partial order but not a total order. 
+\vspace{1mm}
+\end{minipage}
+}
+}
+
+The subset relation $\subseteq$ on all subsets of $\mathbb{Z}$ is defined such that for any $A, B \subset \mathbb{Z}$, we have $A \subseteq B$ if and only if $x \in A$ $\Rightarrow$ $x \in B$. 
+
+A partial order is a binary relation $R$ that is (a) reflexive; (b) anti-symmetric; and (c) transitive:
+
+\begin{enumerate}
+\item \textit{\textbf{Reflexive:}} A binary relation $R \subseteq A \times A$ is \textit{reflexive} if $a \hspace{1mm} R \hspace{1mm} a$ for all $a \in A$. To show that the subset relation $\subseteq$ is reflexive, we must show that for all $A \subset \mathbb{Z}$, we have $A \subseteq A$. This is clearly the case since $x \in A$ $\Rightarrow$ $x \in A$.
+
+\item \textit{\textbf{Anti-Symmetric:}} A binary relation $R \subseteq A \times A$ is \textit{anti-symmetric} if $a \hspace{1mm} R \hspace{1mm} b$ and $b \hspace{1mm} R \hspace{1mm} a$ imply $a=b$. The subset relation $\subseteq$ is anti-symmetric as per the definition of set equality. We say that two sets $A$ and $B$ are equal if and only if $A \subseteq B$ and $B \subseteq A$. Thus the definition of set equality coincides with the definition of anti-symmetry in this case. So clearly, if we have $A \subseteq B$ and $B \subseteq A$ for $A, B \subset \mathbb{Z}$, we must have $A = B$ as per the definition of set equality. 
+
+More formally, $A \subseteq B$ implies that $x \in A \Rightarrow x \in B$, and likewise $B \subseteq A$ implies that $x \in B \Rightarrow x \in A$. Hence, if $A \subseteq B$ and $B \subseteq A$ with $A, B \subset \mathbb{Z}$, then $x \in A \Rightarrow x \in B$ and $x \in B \Rightarrow x \in A$ and so the two sets contain the same elements, and we say that $A = B$. 
+
+\item \textit{\textbf{Transitive:}} A binary relation $R \subseteq A \times A$ is \textit{transitive} if $a \hspace{1mm} R \hspace{1mm} b$ and $b \hspace{1mm} R \hspace{1mm} c$ imply $a \hspace{1mm} R \hspace{1mm} c$ for all $a, b, c \in A$. Suppose we know that $A \subseteq B$ and $B \subseteq C$ with $A, B, C, \subset \mathbb{Z}$, so that $x \in A \Rightarrow x \in B$ and $x \in B \Rightarrow x \in C$. Hence if $x \in A$ we can conclude that $x \in C$, and we can write $A \subseteq C$, so the subset relation $\subseteq$ is transitive. This establishes the subset relation $\subseteq$ on all subsets of $\mathbb{Z}$ as a partial order. 
+\end{enumerate}
+
+The partial order $\subseteq$ on all subsets of $\mathbb{Z}$ would be a total order if for every $A, B \subset \mathbb{Z}$, we have $A \subseteq B$ or $B \subseteq A$. Clearly this is not the case since we could choose $A = \{1,3,5\}$ and $B = \{2,4,6\}$, and clearly both $A \not\subseteq B$ and $B \not\subseteq A$. Consequently, the subset relation $\subseteq$ on all subsets $\mathbb{Z}$ is not a total order. 
+
+\vspace{5mm}
+\noindent{
+\framebox {
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+\vspace{2mm}
+2. Show that for any positive integer $n$, the relation ``equivalent modulo $n$'' is an equivalence relation on the integers. (We say that $a \equiv b \mod n$ if there exists an integer $q$ such that $a-b = qn$). Into what equivalence classes does this relation partition the integers? 
+\vspace{1mm}
+\end{minipage}
+}
+}
+
+We have the relation $R = \{(a,b) : a, b \in \mathbb{Z}$ and $a - b = qn$ where $q, n \in \mathbb{Z}\}$. To show that $R$ is an equivalence relation we must show that it is (a) reflexive; (b) symmetric; and (c) transitive:
+
+\begin{enumerate}
+\item \textit{\textbf{Reflexive:}} A binary relation $R \subseteq A \times A$ is \textit{reflexive} if $a \hspace{1mm} R \hspace{1mm} a$ for all $a \in R$. Clearly, $(a,a)$ since $a - a = 0$ and $0 \in \mathbb{Z}$, so $R$ is reflexive. 
+
+\item \textit{\textbf{Symmetric:}} A binary relation $R \subseteq A \times A$ is \textit{symmetric} if $a \hspace{1mm} R \hspace{1mm} b$ implies $b \hspace{1mm} R \hspace{1mm} a$ for all $a, b \in A$. Suppose that $(a,b)$. Then we can write $a - b = qn$ where $q, n \in \mathbb{Z}$. Multiplying this expression by $-1$, we have $b - a = (-q)n$, with $-q \in \mathbb{Z}$. Hence $(b,a)$, and $R$ is symmetric. 
+
+\item \textit{\textbf{Transitive:}} A binary relation $R \subseteq A \times A$ is \textit{transitive} if $a \hspace{1mm} R \hspace{1mm} b$ and $b \hspace{1mm} R \hspace{1mm} c$ imply $a \hspace{1mm} R \hspace{1mm} c$. Suppose that we have $(a,b)$ and $(b,c)$. Then we can write $a - b = qn$ and $b - c = rn$ for $q, r, n \in \mathbb{Z}$. Combining these two expressions we get $a - c = (q+r)n$, with $q+r \in \mathbb{Z}$. Hence $(a,b)$ and $(b,c)$ imply $(a,c)$, and $R$ is transitive. 
+\end{enumerate}
+
+For any $a \in \mathbb{Z}$, the equivalence class $[a] = \{b \in \mathbb{Z} : a \hspace{1mm} R \hspace{1mm} b\}$ will look like $[a] = \{ ..., a - 2n, a - n, a,  a + n, a + 2n, ...\}$, with the set $\mathbb{Z}$ being partitioned into $n$ equivalence classes. 
+
+For example, choosing $n=3$, we have the following equivalence classes:
+
+\[ [0] = \{ ..., -6, -3, 0, 3, 6, ...\} \]
+\[ [1] = \{ ..., -5, -2, 1, 4, 7, ...\} \] 
+\[ [2] = \{ ..., -4, -1, 2, 5, 8, ...\} \]
+
+\vspace{2mm}
+\noindent{
+\framebox {
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+\vspace{2mm}
+3. Give examples of relations that are
+
+\begin{enumerate}[label=(\alph*)]
+\item reflexive and symmetric but not transitive;
+\item reflexive and transitive but not symmetric;
+\item symmetric and transitive but not reflexive; 
+\end{enumerate}
+\vspace{1mm}
+\end{minipage}
+}
+}
+
+\begin{enumerate}[label=(\alph*)]
+\item reflexive and symmetric but not transitive;
+
+The relation $R$ on the reals $\mathbb{R}$ defined by $R = \{(x,y) : |x-y| < 2\}$ is reflexive and symmetric, but not transitive:
+
+\begin{enumerate}
+\item Reflexive: For any $x \in \mathbb{R}$, we have $(x,x)$ since $|x -x| = 0 < 2$.
+\item Symmetric: For any $x, y \in \mathbb{R}$, $(x,y)$ implies that $|x-y| < 2$. Since $|x-y| = |y-x|$, we have that $|x-y| < 2$ implies  $|y-x| < 2$. We conclude that $(x,y)$ implies $(y,x)$ and that $R$ is symmetric.
+\item Transitive: Consider that $(9,8) \in R$ since $|9-8| = 1 < 2$, and that $(8,7) \in R$ since $|8-7| = 1 < 2$. However, $(9,7) \not\in R$ since $|9-7| = 2 \not< 2$. Hence $(a,b)$ and $(b,c)$ does not imply that $(a,c)$, and consequently $R$ is not transitive. 
+\end{enumerate}
+
+\item reflexive and transitive but not symmetric;
+
+The relation $\le$ on the integers $\mathbb{Z}$ is reflexive and transitive, but not symmetric:
+
+\begin{enumerate}
+\item Reflexive: For any integer $a \in \mathbb{Z}$, we have $a \le a$.
+\item Symmetric: For any $a, b \in \mathbb{Z}$, $a \le b$ does not necessarily imply that $b \le a$. For example, $1 \le 3$, but $3 \not\le 1$.
+\item Transitive: For any $a, b, c \in \mathbb{Z}$, if $a \le b$ and $b \le c$ then $a \le c$.
+\end{enumerate}
+
+\item symmetric and transitive but not reflexive; 
+
+The relation $R$ on the integers $\mathbb{Z}$ defined by $R = \{(1,1), (1,2), (2,1), (2,2)\}$ is symmetric and transitive, but not reflexive. 
+
+\begin{enumerate}
+\item Reflexive: A binary relation $R \subseteq A \times A$ is reflexive if $a \hspace{1mm} R \hspace{1mm} a$ for all $a \in A$. In this case, $R$ is not reflexive since $3 \in \mathbb{Z}$ but $(3,3) \not\in R$.
+
+\item Symmetric: A binary relation $R \subseteq A \times A$ is symmetric if $a \hspace{1mm} R \hspace{1mm} b$ implies $b \hspace{1mm} R \hspace{1mm} a$ for all $a, b \in A$. Consider the following cases:
+
+\begin{enumerate}
+\item $(1,1) \Rightarrow (1,1)$ since $(1,1) \in R$;
+\item $(1,2) \Rightarrow (2,1)$ since $(2,1) \in R$;
+\item $(2,1) \Rightarrow (1,2)$ since $(1,2) \in R$;
+\item $(2,2) \Rightarrow (2,2)$ since $(2,2) \in R$.
+\end{enumerate}
+
+There is no other ordered pair $(a,b)$ with $a,b \in \mathbb{Z}$ where $(a,b) \in R$. Based on the four cases enumerated above, we conclude that $R$ is symmetric.
+
+\item Transitive: A binary relation $R \subseteq A \times A$ is transitive if $a \hspace{1mm} R \hspace{1mm} b$ and $b \hspace{1mm} R \hspace{1mm} c$ imply $a \hspace{1mm} R \hspace{1mm} c$ for all $a, b, c \in A$. Consider the following cases:
+
+\begin{enumerate}
+\item $(1,1) \land (1,1) \Rightarrow (1,1)$ since $(1,1) \in R$;
+\item $(1,1) \land (1,2) \Rightarrow (1,2)$ since $(1,2) \in R$;
+\item $(1,2) \land (2,1) \Rightarrow (1,1)$ since $(1,1) \in R$;
+\item $(1,2) \land (2,2) \Rightarrow (1,2)$ since $(1,2) \in R$;
+\item $(2,1) \land (1,1) \Rightarrow (2,1)$ since $(2,1) \in R$;
+\item $(2,1) \land (1,2) \Rightarrow (2,2)$ since $(2,2) \in R$;
+\item $(2,2) \land (2,1) \Rightarrow (2,1)$ since $(2,1) \in R$;
+\item $(2,2) \land (2,2) \Rightarrow (2,2)$ since $(2,2) \in R$.
+\end{enumerate}
+
+There is no other combination of ordered pairs $(a,b), (b,c)$ with $a,b,c \in \mathbb{Z}$ where $(a,b), (b,c) \in R$. Based on the eight cases enumerated above, we conclude that $R$ is transitive. 
+\end{enumerate}
+\end{enumerate}
+
+\noindent{
+\framebox {
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+\vspace{2mm}
+4. Let $S$ be a finite set, and let $R$ be an equivalence relation on $S \times S$. Show that if in addition $R$ is antisymmetric, then the equivalence classes of $S$ with respect to $R$ are singletons. 
+\vspace{1mm}
+\end{minipage}
+}
+}
+
+From the definition of equivalence class, we have $[a] = \{b \in S : a \hspace{1mm} R \hspace{1mm} b\}$. Because $R$ is an equivalence relation, we know that $R$ is reflexive, symmetric and transitive. We proceed as follows: 
+
+\begin{enumerate}
+\item Since $R$ is reflexive, we have $a \in [a]$;
+\item Suppose further that $b \in [a]$, so that $a \hspace{1mm} R \hspace{1mm} b$;
+\item Since $R$ is symmetric, we have $a \hspace{1mm} R \hspace{1mm} b \Rightarrow b \hspace{1mm} R \hspace{1mm} a$.
+\end{enumerate}
+Since $a \hspace{1mm} R \hspace{1mm} b$ and $b \hspace{1mm} R \hspace{1mm} a$, and since $R$ is anti-symmetric, we conclude that $a = b$. Hence, the equivalence classes of $S$ with respect to $R$ are singletons. 
+
+\vspace{5mm}
+\noindent{
+\framebox {
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+\vspace{2mm}
+5. Professor Narcissus claims that if a relation $R$ is symmetric and transitive, then it is also reflexive. He offers the following proof. By symmetry, $a \hspace{1mm} R \hspace{1mm} b$ implies $b \hspace{1mm} R \hspace{1mm} a$. Transitivity, therefore, implies $a \hspace{1mm} R \hspace{1mm} a$. Is the professor correct? 
+\vspace{1mm}
+\end{minipage}
+}
+}
+
+No, the professor is not correct. In Exercise 5.3(c) above, we have given an example of a relation that is symmetric and transitive, but not reflexive. 
+
+The error is that in order for a relation to be reflexive, we must have $a \hspace{1mm} R \hspace{1mm} a$ for \textit{all} $a \in A$, while in order for it to be symmetric, we need not have $a \hspace{1mm} R \hspace{1mm} b$ for \textit{every} pair of elements $a, b \in A$. Rather, symmetry implies that \textit{if} $a \hspace{1mm} R \hspace{1mm} b$, \textit{then} we have $b \hspace{1mm} R \hspace{1mm} a$, but there may be numerous ordered pairs $(a,b)$ for which $(a,b) \not\in R$ even though $R$ is symmetric.
+
+As an example, the $=$ relation on the integers $\mathbb{Z}$ is an equivalence relation, so we know that it is reflexive, symmetric and transitive. Because it is reflexive, we have $a=a$ for \textit{all} $a \in \mathbb{Z}$. Moreover, since it is symmetric, we know that \textit{if} we have $a = b$ for $a, b \in \mathbb{Z}$, \textit{then} it necessarily follows that $b=a$. However, there are numerous ordered pairs $(a,b)$ with $a,b \in \mathbb{Z}$ for which $(a,b) \not\in R$, for example $(3,5)$ since $3 \not= 5$.
+
+The Professor's error lies in assuming that just because he found an ordered pair $(a,b) \in R$ for which symmetry holds, that this implies that reflexivity must hold for \textit{all} $a \in A$, which is not necessarily the case. 
+
+\end{document}

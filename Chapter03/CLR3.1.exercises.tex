@@ -1,0 +1,318 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{ amssymb }
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{color}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+ \usepackage{tikz}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\begin{document}
+
+\noindent{
+\framebox{
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+\vspace{2mm}
+1. Find a simple formula for $\sum_{k=1}^n (2k-1)$.
+\vspace{2mm}
+\end{minipage}
+}
+}
+
+By distribution: 
+
+\[ \sum_{k=1}^n (2k-1) = 2\sum_{k=1}^n k - \sum_{k=1}^n  1\]
+
+Since $\sum_{k=1}^n k = n(n+1)/2$ and $\sum_{k=1}^n a = n a$, we can write:
+
+\[ = 2\cdot\left( \frac{1}{2} \right) \cdot n \left(n+1\right) - n\]
+
+\[ = n^2 + n - n = n^2 \]
+
+Hence:
+
+\[ S(n) = \sum_{k=1}^n (2k-1)  = n^2 \]
+
+\noindent{
+\framebox{
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+\vspace{2mm}
+2. Show that $\sum_{k=1}^n 1 / \left(2k-1\right) = \ln(\sqrt{n}) + O(1)$ by manipulating the harmonic series.
+\vspace{2mm}
+\end{minipage}
+}
+}
+
+We can define $K(n)$ as:
+
+\[ K(n) = \sum_{k=1}^n 1 / \left(2k-1\right) = 1 + \frac{1}{3} + \frac{1}{5} + ... + \frac{1}{2n-1}\]
+
+so that the harmonic function
+
+\[ H(n) = 1 + \frac{1}{2} + \frac{1}{3} + ... + \frac{1}{n} = \ln(n) + O(1) \]
+
+can be expressed as: 
+
+\[ H(2n) = \frac{1}{2} H(n) + K(n) \]
+
+\[ K(n) = H(2n) - \frac{1}{2} H(n) \]
+
+Substituting the expression from above for $H(n)$ and $H(2n)$, we have:
+
+\[ K(n) =  \ln(2n) + O(1) - \frac{1}{2} \left\{ \ln(n) + O(1) \right\}  \]
+
+\[ K(n) = \ln(2n) - \frac{1}{2}\ln(n) + \frac{1}{2} \cdot O(1) \] 
+
+Since $\ln(2n) = \ln(2) + \ln(n)$, we can write: 
+
+\[ K(n) = \frac{1}{2} \ln(n) + \frac{1}{2}\cdot O(1) + \ln(2) \]
+
+With asymptotic notation, the expression $\frac{1}{2} \cdot O(1)$ reduces to $O(1)$, and the constant $\ln(2)$ can be absorbed into the $O(1)$ term as well:
+
+\[ K(n) = \frac{1}{2}\log(n) + O(1)  \]
+
+\[ K(n) = \log(\sqrt{n}) + O(1) \]
+
+\[ \sum_{k=1}^n \frac{1}{2k-1} = \log(\sqrt{n}) + O(1) \]
+
+\noindent{
+\framebox{
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+\vspace{2mm}
+3. Show that $\sum_{k=0}^\infty(k-1)/2^k = 0$.
+\vspace{2mm}
+\end{minipage}
+}
+}
+
+Since $|\frac{k-1}{2^k}| < 1$ for $k > 1$, we can write:
+
+\[ S(x) = \sum_{k=0}^\infty x^k = \frac{1}{1-x} \]
+
+\[ S'(x) = \sum_{k=0}^\infty k x^{k-1} = \frac{1}{(1-x)^2} \]
+
+\[ xS'(x) = \sum_{k=0}^\infty k x^{k} = \frac{x}{(1-x)^2}  \]
+
+Next we define $F(x)$ as:
+
+\[ F(x) = xS'(x) - S(x) = \frac{x}{(1-x)^2} - \frac{1}{1-x} \]
+
+\[ F(x) = \sum_{k=0}^\infty k x^k - \sum_{k=0}^\infty x^k = \frac{2x-1}{(1-x)^2}\]
+
+\[ F(x) = \sum_{k=0}^\infty (k-1)x^k = \frac{2x-1}{(1-x)^2} \]
+
+We can now write:
+
+\[ F(1/2) = \sum_{k=0}^\infty (k-1)/2^k = \frac{2(1/2) - 1}{1/4} = 0 \]
+
+\[ \sum_{k=0}^\infty (k-1)/2^k  = 0 \]
+
+\noindent{
+\framebox{
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+\vspace{2mm}
+4. Evaluate the sum $\sum_{k=1}^\infty (2k+1) x^{2k}$.
+\vspace{2mm}
+\end{minipage}
+}
+}
+
+We can write:
+
+\[ \sum_{k=1}^\infty x^k = \frac{x}{1-x} \]
+
+Define $S(x)$ as:
+\[ S(x) = \sum_{k=1}^\infty (x^2)^k = \sum_{k=1}^\infty x^{2k} = \frac{x^2}{1-x^2} \]
+
+so that
+
+\[ S'(x) = \sum_{k=1}^\infty (2k)x^{2k-1} = \frac{2x}{(1-x^2)^2} \]
+
+\[ xS'(x) = \sum_{k=1}^\infty (2k)x^{2k} = \frac{2x^2}{(1-x^2)^2}  \]
+
+Now define $F(x)$ as:
+
+\[ F(x) = xS'(x) + S(x) = \sum_{k=1}^\infty (2k)x^{2k} + \sum_{k=1}^\infty x^{2k} = \frac{2x^2}{(1-x^2)^2} + \frac{x^2}{1-x^2} \]
+
+\[ F(x) = \sum_{k=1}^\infty(2k+1) x^{2k} = \frac{3x^2 - x^4}{(1-x^2)^2} \] 
+
+\noindent{
+\framebox{
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+\vspace{2mm}
+5. Use the linearity property of summations to prove that:
+\[ \sum_{k=1}^n O(f_k(m)) = O\left(\sum_{k=1}^n f_k(m)\right) \]
+\vspace{0mm}
+\end{minipage}
+}
+}
+
+By definition, a function $h(m)$ is $O(f(m))$, written  $h(m) = O(f(m))$, if we can find positive constants $c$ and $m_0$ such that $0 \le h(m) \le c \cdot f(m)$ of all $m \ge m_0$.
+
+We can therefore expand $\sum_{k=1}^n O(f_k(m))$ as follows:
+
+\[ \sum_{k=1}^n O\left(f_k(m)\right) = O(f_1(m)) + O(f_2(m)) + ... + O(f_n(m)) \]
+
+\[ = h_1(m) + h_2(m) + ... + h_n(m) \]
+where
+
+\[ h_k(m) = O(f_k(m)) \]
+
+For each $h_k(m)$ we can, by definition, find positive constants $c_k$ and $m_k$ such that $h_k(m) \le c_k \cdot f_k(m)$ for all $m \ge m_k$.
+
+Let $m_0 = \max\left(m_k\right)$, and define $h(m)$ as:
+
+\[ h(m) = \sum_{k=1}^n O \left(f_k(m)\right) \]
+
+Provided that $m \ge m_0$, we can now write:
+
+\[ h(m) \le \sum_{k=1}^n c_k \cdot f_k(m) \]
+
+Let $c_0 = \max(c_k)$, so that we can write:
+
+\[ h(m) \le \sum_{k=1}^n c_k \cdot f_k(m) \le \sum_{k=1}^n c_0 \cdot f_k(m) \]
+
+By the linearity property:
+
+\[ h(m) \le c_0 \cdot  \sum_{k=1}^n f_k(m) \]
+
+By construction, we have identified positive constants $c_0$ and $m_0$ such that the expression above holds true. 
+
+Consequently, we can write:
+
+\[ h(m) = O\left(\sum_{k=1}^n f_k(m) \right)\]
+
+which was to be proved. 
+
+\vspace{5mm}
+\noindent{
+\framebox{
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+\vspace{2mm}
+6. Prove that:
+
+\[ \sum_{k=1}^\infty \Omega (f_k(m)) = \Omega \left(\sum_{k=1}^\infty f_k(m)\right) \]
+\vspace{0mm}
+\end{minipage}
+}
+}
+
+We presume that the limit exists, otherwise the problem is ill-posed. 
+
+By definition, a function $h(m)$ can be expressed as $h(m) = \Omega(f(m))$ if we can find positive constants $c$ and $m_0$ such that $0 \le c\cdot f(m) \le h(m)$ for all $m \ge m_0$.
+
+We can therefore expand $\sum_{k=1}^n \Omega(f_k(m))$ as follows:
+
+\[ \sum_{k=1}^n \Omega(f_k(m)) = \Omega(f_1(m)) + \Omega(f_2(m)) + ... + \Omega(f_n(m)) \]
+
+\[ = h_1(m) + h_2(m) + ... + h_n(m) \]
+
+For each $h_k(m)$ we can, by definition, find positive constants $c_k$ and $m_k$ such that $c_k \cdot f_k(m) \le h_k(m)$ for all $m \ge m_k$.
+
+Let $m_0 = \max(m_k)$, and define $h(m)$ as:
+
+\[ h(m) = \lim_{n \rightarrow \infty} \sum_{k=1}^n \Omega\left(f_k(m)\right) = \sum_{k=1}^\infty \Omega\left( f_k(m)\right) \]
+
+Provided that $m \ge m_0$, we can now write:
+
+\[ \lim_{n \rightarrow \infty} \sum_{k=1}^n c_k \cdot f_k(m) \le h(m) \]
+
+Let $c_0 = \min(c_k)$, so that we can write:
+
+\[  \lim_{n \rightarrow \infty} \sum_{k=1}^n c_0 \cdot f_k(m) \le \lim_{n \rightarrow \infty} \sum_{k=1}^n c_k \cdot f_k(m) \le h(m) \]
+
+By the linearity property: 
+
+\[ c_0 \cdot \lim_{n \rightarrow \infty} \sum_{k=1}^n f_k(m) =  c_0 \cdot \sum_{k=1}^\infty f_k(m) \le h(m) =  \sum_{k=1}^\infty \Omega (f_k(m))  \]
+
+By construction, we have identified positive constants $c_0$ and $m_0$ such that the expression above holds true. 
+
+Consequently, we can write:
+
+\[ \sum_{k=1}^\infty \Omega (f_k(m))  = \Omega \left(\sum_{k=1}^\infty f_k(m) \right) \]
+
+which was to be proven.
+
+\vspace{5mm}
+\noindent{
+\framebox{
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+\vspace{2mm}
+7. Evaluate the product $\prod_{k=1}^n 2 \cdot 4^k$.
+\vspace{2mm}
+\end{minipage}
+}
+}
+
+We can factor out the 2, which will contribute $2^n$ to the final product.
+
+\vspace{2mm}
+Define $P(n)$ as:
+
+\[ P(n) = \prod_{k=1}^n 4^k = \prod_{k=1}^n 2^{2k} \]
+
+\[ \lg P(n) = \sum_{k=1}^n \lg 2^{2k} = \sum_{k=1}^n 2k \]
+
+\[ \lg P(n) = n(n+1) \]
+
+\[ P(n) = 2^{n(n+1)} \]
+
+Factoring back in $2^n$ term, we are left with:
+
+\[ \prod_{k=1}^n 2 \cdot 4^k = 2^{n(n+2)} \]
+
+\noindent{
+\framebox{
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+\vspace{2mm}
+8. Evaluate the product $\prod_{k=2}^n \left(1 - 1/k^2\right)$.
+\vspace{2mm}
+\end{minipage}
+}
+}
+
+Define $P(n)$ as:
+
+\[ P(n) = \prod_{k=2}^n \left(1 - 1/k^2\right) = \prod_{k=2}^n\left( \frac{k^2-1}{k^2} \right) = \prod_{k=2}^n \left\{ \frac{(k+1)(k-1)}{k^2}\right\} \]
+
+\[ \lg P(n) = \sum_{k=2}^n \left\{\lg (k+1) + \lg(k-1) - 2\lg k \right\}\]
+
+\[ = \sum_{k=2}^n \left\{ \lg(k+1) - \lg k \right\}+ \sum_{k=2}^n \left\{\lg(k-1) - \lg k \right\} \]
+
+We evaluate each of these two terms separately:
+
+\[ S_1(n) = \sum_{k=2}^n \left\{\lg(k+1) - \lg k\right\} \]
+
+\[ = -\sum_{k=2}^n \left\{\lg k - \lg(k+1) \right\} \]
+
+\[ = -\left\{\ln 2 - \ln(n+1)\right\}\]
+
+\[ = \ln\left(\frac{n+1}{2}\right) \]
+
+and
+
+\[ S_2(n) = \sum_{k=2}^n \left\{\lg(k-1) - \lg k \right\} \]
+
+\[ = - \sum_{k=2}^n \left\{\lg k - \lg(k-1) \right\} \]
+
+\[ = -\left\{\ln n - \ln 1\right\}\]
+
+\[ = -\ln n \]
+
+so that
+
+\[ \lg P(n) = S_1(n) + S_2(n) = \ln \left(\frac{n+1}{2}\right) - \ln n \]
+
+\[ \lg P(n) = \ln \left(\frac{n+1}{2n} \right) \]
+
+\[ P(n) = \frac{n+1}{2n} \]
+
+so that
+
+\[ \prod_{k=2}^n \left(1 - 1/k^2\right) = \frac{n+1}{2n}\]
+
+\end{document}

@@ -1,0 +1,153 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{ amssymb }
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{color}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+ \usepackage{tikz}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\begin{document}
+
+\noindent{
+\framebox{
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+\vspace{2mm}
+1.  Show that $\sum_{k=1}^n 1/k^2$ is bounded above a constant.
+\vspace{2mm}
+\end{minipage}
+}
+}
+
+$f(x) = 1/x^2$ is monotonically decreasing, so the upper bound is given by:
+
+\[ S(n) = \sum_{k=1}^n \frac{1}{k^2} \le \sum_{k=1}^\infty \frac{1}{k^2} = 1 + \sum_{k=2}^\infty \frac{1}{k^2} \]
+\[ \le 1 + \int_1^\infty \frac{dx}{x^2} = 2 \]
+
+The summation is bounded above by 2.
+
+\vspace{2mm}
+This bound is comparatively loose, $n=10\,000$ gives $S(n) \approx 1.644$.
+
+\vspace{5mm}
+\noindent{
+\framebox{
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+\vspace{2mm}
+2.  Find an asymptotic upper bound on the summation
+
+\[ \sum_{k=0}^{\floor*{\lg n}} \ceil*{n/2^k} \]
+\vspace{2mm}
+\end{minipage}
+}
+}
+
+Since $\ceil{x} < x + 1$, we can write:
+
+\[ S(n) = \sum_{k=0}^{\floor{\lg n}} \ceil{\frac{n}{2^k}} < \sum_{k=0}^{\floor{\lg n}}\left( \frac{n}{2^k} + 1\right) \le   \sum_{k=0}^{\lg n}\left( \frac{n}{2^k} + 1\right) \]
+
+\[ S(n) < n \sum_{k=0}^{\lg n}\left( \frac{1}{2} \right)^k+ \sum_{k=0}^{\lg n} 1 \]
+
+The first summation in the expression on the left is a geometric series that can be simplified using $\sum_{k=0}^n x^k = (x^{n+1}-1)/(x-1)$, and which gives $(2^{\lg n+1}-1)/2^{\lg n} = (2 \cdot 2^{\lg n} -1)/2^{\lg n} = (2n-1)/n$, while the second summation simply evaluates to $\sum_{k=0}^{\lg n} 1 = \lg n + 1$. Hence:
+
+\[ S(n) < n \cdot \left( \frac{2n-1}{n} \right) + \lg n + 1\]
+
+\[ S(n) < 2n + \lg n \]
+
+The linear term $n$ dominates $\lg n$, hence we can write $S(n) = O(n)$. Evaluating $S(n)$ for various values of $n$, you'll find that the sum adds up to (more or less) $2n$ pretty consistently.
+
+\vspace{5mm}
+\noindent{
+\framebox{
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+\vspace{2mm}
+3.  Show that the $n$th harmonic number is $\Omega\left(\lg n\right)$ by splitting the summation.
+\vspace{2mm}
+\end{minipage}
+}
+}
+
+The $n$th harmonic number is given by:
+
+\[ H_n = \sum_{k=1}^n \frac{1}{k} \]
+
+We can split the summation as follows:
+
+\[ \sum_{i=0}^{\floor{\lg n}-1} \sum_{j=0}^{2^i-1} \frac{1}{2^i+j} \le \sum_{k=1}^n \frac{1}{k} \]
+
+\[ \sum_{i=0}^{\floor{\lg n}-1} \sum_{j=0}^{2^i-1} \frac{1}{2^{i+1}} \le \sum_{i=0}^{\floor{\lg n}-1} \sum_{j=0}^{2^i-1} \frac{1}{2^i+j} \le \sum_{k=1}^n \frac{1}{k} \]
+
+The leftmost expression can be further simplified as: 
+
+\[ \sum_{i=0}^{\floor{\lg n}-1} \sum_{j=0}^{2^i-1} \frac{1}{2^{i+1}}  = \frac{1}{2} \cdot \sum_{i=0}^{\floor{\lg n}-1} \sum_{j=0}^{2^i-1} \frac{1}{2^{i}} \]
+
+Since $\sum_{j=0}^{2^i-1} 2^{-i} =1$, we can write:
+
+\[ \sum_{i=0}^{\floor{\lg n}-1} \sum_{j=0}^{2^i-1} \frac{1}{2^{i+1}}  = \frac{1}{2} \cdot \sum_{i=0}^{\floor{\lg n}-1} \left(1\right) = \frac{1}{2} \floor{\lg n} \]
+
+So $\frac{1}{2} \floor{\lg n} \le H_n$, and hence $H_n = \Omega(\floor{\lg n})$.  
+
+\vspace{2mm}
+Recall that we say $f(n) = \Omega(g(n))$ if there exist positive constants $c$ and $n_0$ such that $0 \le c \cdot g(n) \le f(n)$ for all $n \ge n_0$. To complete the proof, bear in mind that $\lg n = \log_2 n$, so we have the identity:
+
+\[ \lg \frac{n}{2} =  \lg n - 1 < \floor{\lg n} \]
+
+We seek $c > 0$ such that for sufficiently large $n$ we have:
+
+\[ c \cdot \lg n \le \lg \frac{n}{2} = \lg n - 1 \]
+
+Suppose we choose $n_0 = 4$, then:
+
+\[ c \cdot \lg n_0 \le \lg n_0 - 1 \]
+
+\[ 2c \le 1\]
+
+\[ c \le \frac{1}{2} \]
+
+So any choice of $c \le 1/2$, for instance $c = 1/4$, will work. When we remember to include the factor of $1/2$ from the first part of the proof (i.e., we would select, in this instance, c = 1/2 $\cdot$ 1/4), we find that by selecting $c = 1/8$ and $n_0 = 4$, we have for all $n \ge n_0$:
+
+\[ 0 \le c \cdot \lg n < \frac{1}{2} \floor{\lg n} \le H_n \]
+ so we can write $H_n = \Omega(\lg n)$.
+
+\vspace{5mm}
+\noindent{
+\framebox{
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+\vspace{2mm}
+4.  Approximate $\sum_{k=1}^n k^3$ with an integral.
+\vspace{2mm}
+\end{minipage}
+}
+}
+
+$f(x) = x^3$ is monotonically increasing, so the bounds are given by:
+
+\[ \int_0^n x^3 dx \le \sum_{k=1}^n k^3 \le \int_1^{n+1} x^3 dx \]
+
+\[ \frac{1}{4} n^4 \le \sum_{k=1}^n k^3  \le \frac{1}{4} \left[(n+1)^4-1 \right] \]
+
+
+\vspace{5mm}
+\noindent{
+\framebox{
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+\vspace{2mm}
+5.  Why didn't we use the integral approximation (3.10) directly on $\sum_{k=1}^n 1/k$ to obtain an upper bound on the $n$th harmonic number? 
+\vspace{2mm}
+\end{minipage}
+}
+}
+
+The integral approximation (3.10), for monotonically decreasing functions, is given by:
+
+\[ \int_m^{n+1} f(x) dx = \sum_{k=m}^n f(k) \le \int_{m-1}^n f(x)dx \]
+
+In this case $f(k) = 1/k$, so evaluating the upper bound requires computing the value of the integral $\int_0^n dx/x$, which is undefined at the $x=0$ boundary.  To find the upper bound for $H_n$, we must avoid this boundary:
+
+\[ H_n = \sum_{k=1}^n \frac{1}{k} = 1 + \sum_{k=2}^n \frac{1}{k} \le 1 + \int_1^n \frac{dx}{x} = 1 + \ln n \] 
+
+\end{document}

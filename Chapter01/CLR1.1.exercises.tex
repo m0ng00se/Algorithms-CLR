@@ -1,0 +1,246 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{ amssymb }
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{color}
+\usepackage[utf8]{inputenc}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{highlightcolor}{rgb}{0.8, 0.9, 0.9}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+ 
+\lstset{style=mystyle}
+
+\newcommand*\Suppressnumber{%
+  \lst@AddToHook{OnNewLine}{%
+    \let\thelstnumber\relax%
+     \advance\c@lstnumber-\@ne\relax%
+    }%
+}
+
+\begin{document}
+
+\noindent{
+\framebox {
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+\vspace{2mm}
+1.  Using Figure 1.2 as a model, illustrate the operation of INSERTION-SORT on the array $A = <31, 41, 59, 26, 41, 58>$.
+\vspace{2mm}
+\end{minipage}
+}
+}
+
+The following Java code implements INSERTION-SORT:
+
+\begin{lstlisting}[language=Java]
+public class Sort {
+  public <T extends Comparable<T>> void sort(List<T> m) {
+    //! Guard against IndexOutOfBoundsException
+    if ( m.size() <= 1 )
+      return;
+      
+    //! Implement INSERTION-SORT
+    for ( int i=1; i < m.size(); ++i ) {
+      T elem = m.get(i);
+      int j = i-1;
+      while ( j >= 0 && m.get(j).compareTo(elem) > 0 ) {
+        m.set(j+1, m.get(j)); j--;
+      }
+      m.set(j+1, elem);
+    }
+  }
+}
+\end{lstlisting}
+
+This is an in-place implementation of INSERTION-SORT, with the output overwriting the input and at most a constant amount of secondary memory being allocated from the heap. 
+The following illustrates the state of the input array as the algorithm runs:
+
+\vspace{5mm}
+$i=1$, $j=0$, $elem = 41$, $A = <31, 41, 59, 26, 41, 58>$
+
+$i=1$, $j=0$, $elem = 41$, $A = <31, \colorbox{highlightcolor}{41}, 59, 26, 41, 58>$ $\rightarrow$ $A(1) = 41$
+
+$i=2$, $j=1$, $elem = 59$, $A = <31, 41, 59, 26, 41, 58>$
+
+$i=2$, $j=1$, $elem = 59$, $A = <31, 41, \colorbox{highlightcolor}{59}, 26, 41, 58>$ $\rightarrow$ $A(2) = 59$
+
+$i=3$, $j=2$, $elem = 26$, $A = <31, 41, 59, 26, 41, 58>$ 
+
+$i=3$, $j=2$, $elem = 26$, $A = <31, 41, 59, \colorbox{highlightcolor}{59}, 41, 58>$ $\rightarrow$ $A(3) = 59$
+
+$i=3$, $j=1$, $elem = 26$, $A = <31, 41, \colorbox{highlightcolor}{41}, \colorbox{highlightcolor}{59}, 41, 58>$ $\rightarrow$ $A(2) = 41$
+ 
+$i=3$, $j=0$, $elem = 26$, $A = <31,\colorbox{highlightcolor}{31}, \colorbox{highlightcolor}{41}, \colorbox{highlightcolor}{59}, 41, 58>$ $\rightarrow$  $A(1) = 31$
+
+$i=3$, $j=-1$, $elem = 26$, $A = <\colorbox{highlightcolor}{26}, \colorbox{highlightcolor}{31}, \colorbox{highlightcolor}{41}, \colorbox{highlightcolor}{59}, 41, 58>$  $\rightarrow$ $A(0) = 26$
+
+$i=4$, $j=3$, $elem = 41$, $A = <26, 31, 41, 59, 41, 58>$
+
+$i=4$, $j=3$, $elem = 41$, $A = <26, 31, 41, 59, \colorbox{highlightcolor}{59}, 58>$ $\rightarrow$ $A(4) = 59$
+
+$i=4$, $j=2$, $elem = 41$, $A = <26, 31, 41, \colorbox{highlightcolor}{41}, \colorbox{highlightcolor}{59}, 58>$ $\rightarrow$ $A(3) = 41$
+
+$i=5$, $j=4$, $elem = 58$, $A = <26, 31, 41, 41, 59, 58>$
+
+$i=5$, $j=4$, $elem = 58$, $A = <26, 31, 41, 41, 59, \colorbox{highlightcolor}{59}>$ $\rightarrow$ $A(5) = 59$
+
+$i=5$, $j=4$, $elem = 58$, $A = <26, 31, 41, 41, \colorbox{highlightcolor}{58}, \colorbox{highlightcolor}{59}>$ $\rightarrow$ $A(4) = 58$
+
+\newpage
+The final result is therefore:
+
+\[ A = <26, 31, 41, 41, 58, 59> \]
+
+\vspace{5mm}
+\noindent{
+\framebox {
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+\vspace{2mm}
+2. Rewrite the INSERTION-SORT procedure to sort into non-increasing instead of non-decreasing order. 
+\vspace{2mm}
+\end{minipage}
+}
+}
+
+The following Java code provides an implementation of INSERTION-SORT that sorts arrays into non-increasing order:
+
+\begin{lstlisting}[language=Java]
+public class Sort {
+  public <T extends Comparable<T>> void sort(List<T> m) {
+    //! Guard against IndexOutOfBoundsException
+    if ( m.size() <= 1 ) 
+      return m;
+      
+    //! Implement INSERTION-SORT
+    for ( int i=1; i < m.size(); ++i ) {
+      T elem = m.get(i);
+      int j = i-1;
+      while ( j >= 0 && m.get(j).compareTo(elem) < 0 ) {
+        m.set(j+1, m.get(j)); j--;
+      }
+      m.set(j+1, elem);
+    }
+  }
+}
+\end{lstlisting}
+
+The only change is at line 11 where
+
+\begin{lstlisting}[numbers=none]
+m.get(j).compareTo(elem) > 0
+\end{lstlisting}
+
+\noindent
+has been changed to:
+
+\begin{lstlisting}[numbers=none]
+m.get(j).compareTo(elem) < 0 
+\end{lstlisting}
+
+\vspace{5mm}
+
+\noindent{
+\framebox {
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+\vspace{2mm}
+3. Consider the \textit{\textbf{searching problem}}:
+
+\vspace{2mm}
+\textbf{Input}:  A sequence of $n$ numbers $A = <a_1, a_2, ..., a_n>$ and a value $v$. 
+
+\vspace{2mm}
+\textbf{Output}: An index $i$ such that $v = A[i]$  or the special value NIL if $v$ does not appear in $A$.
+
+\vspace{2mm}
+Write pseudocode for \textit{\textbf{linear search}}, which scans through the sequence looking for $v$.
+\vspace{2mm}
+\end{minipage}
+}
+}
+
+\newpage
+The following Python code implements the algorithm:
+
+\vspace{3mm}
+\begin{lstlisting}[language=Python]
+def search(A, v):
+  j = None
+  for i in range(len(A)):
+    if A[i] == v:
+      j = i
+      break;   
+  return j
+\end{lstlisting}
+
+\vspace{5mm}
+\noindent{
+\framebox {
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+\vspace{2mm}
+4. Consider the problem of adding two $n$-bit binary numbers, stored in two $n$-element arrays
+$A$ and $B$. The sum of the two integers should be stored in an $(n+1)$-element array $C$. State the problem formally and write pseudocode for adding the two integers.
+\vspace{2mm}
+\end{minipage}
+}
+}
+
+We can reason about this problem inductively (i.e., recursively). 
+
+\vspace{2mm}
+Suppose we start by adding two $1$-bit binary numbers. 
+
+\vspace{2mm}
+There are four cases to consider:
+
+\vspace{2mm}
+[0] + [0] = [00] \newline  \indent
+[1] + [0] = [01] \newline \indent
+[0] + [1] = [01] \newline \indent
+[1] + [1] = [10] 
+
+\vspace{2mm}
+From this pattern we can surmise that:
+
+\[ C[i] = (A[i] + B[i]) \% 2 \] 
+\[ C[i+1] = (A[i] + B[i]) / 2 \]
+
+We can implement the desired algorithm in Python as follows:
+
+\vspace{3mm}
+\begin{lstlisting}[language=Python]
+def add(A, B, n):
+  A_ = A[:]; A_.reverse()
+  B_ = B[:]; B_.reverse()
+  C = [0] * (n+1)
+  for i in range(n):
+    sum_ = A_[i] + B_[i] + C[i]
+    C[i] = int(sum_%2)
+    C[i+1] = int(sum_/2)
+  C.reverse()
+  return C
+\end{lstlisting}
+
+\end{document}
