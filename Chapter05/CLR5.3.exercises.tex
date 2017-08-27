@@ -1,0 +1,85 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{ amssymb }
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{color}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+ \usepackage{tikz}
+ \usepackage{enumitem}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\begin{document}
+
+\noindent{
+\framebox {
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+\vspace{2mm}
+1. Let $A$ and $B$ be finite sets, and let $f : A \rightarrow B$ be a function. Show that
+
+\textbf{a.} if $f$ is injective, then $|A| \le |B|$.
+
+\textbf{b.} if $f$ is surjective, then $|A| \ge |B|$.
+\vspace{1mm}
+\end{minipage}
+}
+}
+
+If $f$ is injective, then each element of the domain maps to a unique element in the codomain. 
+In other words, if $(a,b) \in f$, then we know there is no other $a' \in A$ where $a \ne a'$ such that $(a',b) \in f$. 
+The function $f$ pairs each element of $A$ with exactly one element of $B$.
+Hence, we conclude that $|A| \le |B|$.
+
+If $f$ is surjective, then the range of $f$ is equal to its codomain. In other words, for every $b \in B$, we can 
+find at least one $a \in A$ such that $(a,b) \in f$. The function $f$ pairs each element of $B$ with at least 
+one element in $A$. Hence, we conclude that $|A| \ge |B|$.
+
+\vspace{5mm}
+\noindent{
+\framebox {
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+\vspace{2mm}
+2. Is the function $f(x) = x + 1$ bijective when the domain and the codomain are $\mathbb{N}$? Is it bijective when the domain and the codomain 
+are $\mathbb{Z}$?
+\vspace{1mm}
+\end{minipage}
+}
+}
+
+$f$ is not bijective when the domain and codomain are $\mathbb{N}$. In this case, $f$ is injective, since $a \ne a' \Rightarrow f(a) \ne f(a')$, but 
+$f$ is not surjective. Specifically, as $\mathbb{N} = \{0, 1, 2, ...\}$, there is no $a \in \mathbb{N}$ such that $f(a) = 0$.
+
+$f$ is bijective when the domain and codomain are $\mathbb{Z}$. In this case, $f$ is injective, since $a \ne a' \Rightarrow f(a) \ne f(a')$, and $f$ is also surjective. Specifically $\mathbb{Z} = \{..., -2, -1, 0, 1, 2, ...\}$, so if we are given an arbitrary $b \in \mathbb{Z}$, we can always choose
+$a = b -1 \in \mathbb{Z}$ such that $(a,b) = (b-1,b) \in f$.
+
+\vspace{5mm}
+\noindent{
+\framebox {
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+\vspace{2mm}
+3. Give a natural definition for the inverse of a binary relation such that if a relation is in fact a bijective function, its relational inverse is its 
+functional inverse.
+\vspace{1mm}
+\end{minipage}
+}
+}
+
+[working]
+
+\vspace{5mm}
+\noindent{
+\framebox {
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+\vspace{2mm}
+4. Give a bijection from $\mathbb{Z}$ to $\mathbb{Z} \times \mathbb{Z}$.
+\vspace{1mm}
+\end{minipage}
+}
+}
+
+[working]
+
+\end{document}

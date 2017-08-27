@@ -24,21 +24,24 @@
 }
 }
 
-The subset relation $\subseteq$ on all subsets of $\mathbb{Z}$ is defined such that for any $A, B \subset \mathbb{Z}$, we have $A \subseteq B$ if and only if $x \in A$ $\Rightarrow$ $x \in B$. 
+The subset relation $\subseteq$ on all subsets of $\mathbb{Z}$ is defined such that for any $A, B \subseteq \mathbb{Z}$, we have $A \subseteq B$ if and only if $x \in A$ $\Rightarrow$ $x \in B$. 
+
+Let $\mathcal{A}$ be the set of all subsets of $\mathbb{Z}$, that is $\mathcal{A} = \{A : A \subseteq \mathbb{Z}\}$, and note that we can write 
+the relation $A \subseteq B$ more formally as $(A,B) \in \hspace{1mm} \subseteq$.
 
 A partial order is a binary relation $R$ that is (a) reflexive; (b) anti-symmetric; and (c) transitive:
 
 \begin{enumerate}
-\item \textit{\textbf{Reflexive:}} A binary relation $R \subseteq A \times A$ is \textit{reflexive} if $a \hspace{1mm} R \hspace{1mm} a$ for all $a \in A$. To show that the subset relation $\subseteq$ is reflexive, we must show that for all $A \subset \mathbb{Z}$, we have $A \subseteq A$. This is clearly the case since $x \in A$ $\Rightarrow$ $x \in A$.
+\item \textit{\textbf{Reflexive:}} A binary relation $R \subseteq \mathcal{A} \times \mathcal{A}$ is \textit{reflexive} if $a \hspace{1mm} R \hspace{1mm} a$ for all $a \in \mathcal{A}$. To show that the subset relation $\subseteq$ is reflexive, we must show that for any $A \subseteq \mathbb{Z}$, we have $A \subseteq A$. This is clearly the case since $x \in A$ $\Rightarrow$ $x \in A$.
 
-\item \textit{\textbf{Anti-Symmetric:}} A binary relation $R \subseteq A \times A$ is \textit{anti-symmetric} if $a \hspace{1mm} R \hspace{1mm} b$ and $b \hspace{1mm} R \hspace{1mm} a$ imply $a=b$. The subset relation $\subseteq$ is anti-symmetric as per the definition of set equality. We say that two sets $A$ and $B$ are equal if and only if $A \subseteq B$ and $B \subseteq A$. Thus the definition of set equality coincides with the definition of anti-symmetry in this case. So clearly, if we have $A \subseteq B$ and $B \subseteq A$ for $A, B \subset \mathbb{Z}$, we must have $A = B$ as per the definition of set equality. 
+\item \textit{\textbf{Anti-Symmetric:}} A binary relation $R \subseteq \mathcal{A} \times \mathcal{A}$ is \textit{anti-symmetric} if $a \hspace{1mm} R \hspace{1mm} b$ and $b \hspace{1mm} R \hspace{1mm} a$ imply $a=b$. The subset relation $\subseteq$ is anti-symmetric as per the definition of set equality. We say that two sets $A$ and $B$ are equal if and only if $A \subseteq B$ and $B \subseteq A$. Thus the definition of set equality coincides with the definition of anti-symmetry in this case. So clearly, if we have $A \subseteq B$ and $B \subseteq A$ for $A, B \subseteq \mathbb{Z}$, we must have $A = B$ as per the definition of set equality. 
 
-More formally, $A \subseteq B$ implies that $x \in A \Rightarrow x \in B$, and likewise $B \subseteq A$ implies that $x \in B \Rightarrow x \in A$. Hence, if $A \subseteq B$ and $B \subseteq A$ with $A, B \subset \mathbb{Z}$, then $x \in A \Rightarrow x \in B$ and $x \in B \Rightarrow x \in A$ and so the two sets contain the same elements, and we say that $A = B$. 
+More formally, $A \subseteq B$ implies that $x \in A \Rightarrow x \in B$, and likewise $B \subseteq A$ implies that $x \in B \Rightarrow x \in A$. Hence, if $A \subseteq B$ and $B \subseteq A$ with $A, B \subseteq \mathbb{Z}$, then $x \in A \Rightarrow x \in B$ and $x \in B \Rightarrow x \in A$ and so the two sets contain the same elements, and we say that $A = B$. 
 
-\item \textit{\textbf{Transitive:}} A binary relation $R \subseteq A \times A$ is \textit{transitive} if $a \hspace{1mm} R \hspace{1mm} b$ and $b \hspace{1mm} R \hspace{1mm} c$ imply $a \hspace{1mm} R \hspace{1mm} c$ for all $a, b, c \in A$. Suppose we know that $A \subseteq B$ and $B \subseteq C$ with $A, B, C, \subset \mathbb{Z}$, so that $x \in A \Rightarrow x \in B$ and $x \in B \Rightarrow x \in C$. Hence if $x \in A$ we can conclude that $x \in C$, and we can write $A \subseteq C$, so the subset relation $\subseteq$ is transitive. This establishes the subset relation $\subseteq$ on all subsets of $\mathbb{Z}$ as a partial order. 
+\item \textit{\textbf{Transitive:}} A binary relation $R \subseteq \mathcal{A} \times \mathcal{A}$ is \textit{transitive} if $a \hspace{1mm} R \hspace{1mm} b$ and $b \hspace{1mm} R \hspace{1mm} c$ imply $a \hspace{1mm} R \hspace{1mm} c$ for all $a, b, c \in \mathcal{A}$. Suppose we know that $A \subseteq B$ and $B \subseteq C$ with $A, B, C \subseteq \mathbb{Z}$, so that $x \in A \Rightarrow x \in B$ and $x \in B \Rightarrow x \in C$. Hence if $x \in A$ we can conclude that $x \in C$, and we can write $A \subseteq C$, so the subset relation $\subseteq$ is transitive. This establishes the subset relation $\subseteq$ on all subsets of $\mathbb{Z}$ as a partial order. 
 \end{enumerate}
 
-The partial order $\subseteq$ on all subsets of $\mathbb{Z}$ would be a total order if for every $A, B \subset \mathbb{Z}$, we have $A \subseteq B$ or $B \subseteq A$. Clearly this is not the case since we could choose $A = \{1,3,5\}$ and $B = \{2,4,6\}$, and clearly both $A \not\subseteq B$ and $B \not\subseteq A$. Consequently, the subset relation $\subseteq$ on all subsets $\mathbb{Z}$ is not a total order. 
+The partial order $\subseteq$ on all subsets of $\mathbb{Z}$ would be a total order if for every $A, B \subseteq \mathbb{Z}$, we have $A \subseteq B$ or $B \subseteq A$. Clearly this is not the case since we could choose $A = \{1,3,5\}$ and $B = \{2,4,6\}$, and clearly both $A \not\subseteq B$ and $B \not\subseteq A$. Consequently, the subset relation $\subseteq$ on all subsets $\mathbb{Z}$ is not a total order. 
 
 \vspace{5mm}
 \noindent{
