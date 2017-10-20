@@ -3,10 +3,10 @@ import java.util.List;
 import java.util.Random;
 
 public class Sort {
+    //! Sort a list in increasing order.
     public <T extends Comparable<T>> void sort(List<T> m) {
 	if (m.size() <= 1)
 	    return;
-
 	for (int i=1; i<m.size(); ++i) {
 	    T elem = m.get(i);
 	    int j = i-1;
@@ -17,10 +17,10 @@ public class Sort {
 	}
     }
 
+    //! Sort a list in reverse order.
     public <T extends Comparable<T>> void reverse(List<T> m) {
 	if (m.size() <= 1)
 	    return;
-
 	for (int i=1; i<m.size(); ++i) {
 	    T elem = m.get(i);
 	    int j = i-1;
@@ -31,6 +31,7 @@ public class Sort {
 	}
     }
 
+    //! Return a list of arbitrary ints.
     public static List<Integer> randomInts() {
 	Random rand = new Random();
 	List<Integer> ints = new ArrayList<Integer>();
@@ -40,6 +41,8 @@ public class Sort {
 	}
 	return ints;
     }
+
+    //! Return a list of arbitrary strings.
     public static List<String> randomStrings() {
 	List<String> strings = new ArrayList<String>();
 	strings.add("one");
@@ -54,7 +57,8 @@ public class Sort {
 	strings.add("ten");
 	return strings;
     }
-    
+
+    //! Unit tests
     public static void main(String[] args) {
 	Sort s = new Sort();
 
