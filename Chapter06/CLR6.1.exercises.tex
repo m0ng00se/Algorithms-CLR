@@ -1,0 +1,203 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{ amssymb }
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{color}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+ \usepackage{tikz}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\def \setB{ (0,0) circle (1cm) }
+\def \setC{ (1.5,0) circle (1cm) }
+\def \setA{ (60:1.5) circle (1cm) }
+\def \setU { (-2, -1.5) rectangle (3.5, 2.75) }
+\def \setV { (-2, -1.5) rectangle (4.0, 2.75) }
+\def \setX { (-2, -1.5) rectangle (5.0, 2.75) }
+  
+\begin{document}
+
+\noindent{
+\framebox {
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+\vspace{2mm}
+5. Prove the identity 
+
+\[ \binom{n}{k} = \frac{n}{k} \binom{n-1}{k-1} \]
+
+for $0 < k \le n$.
+\vspace{1mm}
+\end{minipage}
+}
+}
+
+We specify $k > 0$ so that $\binom{n-1}{k-1}$ is not ill-defined.
+
+On the left-hand side we have:
+
+\[ \binom{n}{k} = \frac{n!}{k! (n-k)!} \]
+
+On the right-hand side we have:
+
+\[ \binom{n-1}{k-1} = \frac{(n-1)!}{(k-1)!(n-k)!} \]
+
+Multiplying this expression by $\frac{n}{k}$, we have:
+\[ \frac{n}{k} \binom{n-1}{k-1} = \frac{n(n-1)!}{k(k-1)!(n-k)!}\]
+and since $n! = n(n-1)!$ and $k! = k(k-1)!$, we can write:
+\[ \frac{n}{k} \binom{n-1}{k-1} = \frac{n!}{k!(n-k)!} = \binom{n}{k} \]
+which was to be proved. 
+
+\vspace{5mm}
+\noindent{
+\framebox {
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+\vspace{2mm}
+6. Prove the identity:
+
+\[ \binom{n}{k} = \frac{n}{n-k} \binom{n-1}{k} \]
+
+for $0 \le k < n$.
+\vspace{1mm}
+\end{minipage}
+}
+}
+
+We specify $0 < n-k$ so that $\frac{n}{n-k}$ is not ill-defined.
+
+The expression on the right can be re-written as:
+\[ \frac{n}{n-k} \binom{n-1}{k} =  \frac{n(n-1)!}{k!(n-k)(n-k-1)!} \]
+\[ \frac{n}{n-k} \binom{n-1}{k} = \frac{n!}{k!(n-k)!} = \binom{n}{k} \]
+which was to be proved. 
+
+\vspace{5mm}
+\noindent{
+\framebox {
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+\vspace{2mm}
+7. To choose $k$ objects from $n$, you can make one of the objects distinguished and consider whether the distinguished object
+is chosen. Use this approach to prove that:
+
+\[ \binom{n}{k} = \binom{n-1}{k} + \binom{n-1}{k-1} \]
+
+\vspace{1mm}
+\end{minipage}
+}
+}
+
+If we select $k$ objects from a set of $n$ objects, the distinguished object will either be chosen, or it will not be chosen. 
+If the object is not chosen, there are $\binom{n-1}{k}$ ways to select the $k$ objects from the remaining set of $n-1$ objects.
+If the object is chosen, there are $\binom{n-1}{k-1}$ ways to select the remaining $k-1$ objects from the remaining set of $n-1$ objects. 
+Adding these two numbers together, we arrive at the result. 
+
+The result can also be easily obtained analytically:
+
+\[ \binom{n-1}{k} + \binom{n-1}{k-1} = \frac{(n-1)!}{k!(n-k-1)!} + \frac{(n-1)!}{(k-1)!(n-k)!}\] 
+\[ \binom{n-1}{k} + \binom{n-1}{k-1} = \frac{(n-k)(n-1)! + k(n-1)!}{k!(n-k)!} \]
+\[ \binom{n-1}{k} + \binom{n-1}{k-1} = \frac{n(n-1)!}{k!(n-k)!} \]
+\[ \binom{n-1}{k} + \binom{n-1}{k-1} = \frac{n!}{k!(n-k)!} \]
+
+\vspace{5mm}
+\noindent{
+\framebox {
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+\vspace{2mm}
+8. Using the result of Exercise 7, make a table for $n = 0, 1, ..., 6$ and $0 \le k \le n$ of the binomial coefficients 
+$\binom{n}{k}$ with $\binom{0}{0}$ at the top, $\binom{1}{0}$ and $\binom{1}{1}$ on the next line, and so forth. Such a table of binomial 
+coefficients is called \textbf{\textit{Pascal's triangle}}.
+
+\vspace{1mm}
+\end{minipage}
+}
+}
+
+\[ \binom{0}{0} \]
+\[ \binom{1}{0} \binom{1}{1} \]
+\[ \binom{2}{0} \binom{2}{1} \binom{2}{2} \]
+\[ \binom{3}{0} \binom{3}{1} \binom{3}{2} \binom{3}{3} \]
+\[ \binom{4}{0} \binom{4}{1} \binom{4}{2} \binom{4}{3} \binom{4}{4} \]
+\[ \binom{5}{0} \binom{5}{1} \binom{5}{2} \binom{5}{3} \binom{5}{4} \binom{5}{5} \]
+\[ \binom{6}{0} \binom{6}{1} \binom{6}{2} \binom{6}{3} \binom{6}{4} \binom{6}{5} \binom{6}{6} \]
+
+Bearing in mind that $\binom{0}{0} = \binom{n}{0} = \binom{n}{n} = 1$, we know that the "edges" of this triangle
+will be 1. Filling in the rest of the triangle using the expression $\binom{n}{k} = \binom{n-1}{k} + \binom{n-1}{k-1}$:
+
+\[ 1 \]
+\[ 1 \hspace{2mm} 1 \]
+\[ 1 \hspace{2mm} 2 \hspace{2mm} 1 \] 
+\[ 1 \hspace{2mm} 3 \hspace{2mm} 3 \hspace{2mm} 1 \]
+\[ 1 \hspace{2mm} 4 \hspace{2mm} 6 \hspace{2mm} 4 \hspace{2mm} 1 \]
+\[ 1 \hspace{2mm} 5 \hspace{2mm} 10 \hspace{2mm} 10 \hspace{2mm} 5 \hspace{2mm} 1 \]
+\[ 1 \hspace{2mm} 6 \hspace{2mm} 15 \hspace{2mm} 20  \hspace{2mm}15 \hspace{2mm} 6 \hspace{2mm} 1 \]
+
+\vspace{5mm}
+\noindent{
+\framebox {
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+\vspace{2mm}
+9. Prove that:
+
+\[ \sum_{i=1}^n i = \binom{n+1}{2} \]
+
+\vspace{1mm}
+\end{minipage}
+}
+}
+
+The result $\sum_{i=1}^n i = \frac{1}{2}n(n+1)$ can be established by induction. 
+
+For the case $n=1$:
+\[ \sum_{i=1}^1 i = 1\] 
+and
+\[ \frac{1}{2}(1)(2) =  1\]
+which establishes the result.
+
+Suppose next that $\sum_{i=1}^n i = \frac{1}{2}n(n+1)$ holds for $n$, and consider:
+\[ \sum_{i=1}^{n+1} i = \sum_{i=1}^n i + (n+1) = \frac{1}{2}n(n+1) + (n+1) \]
+\[  \sum_{i=1}^{n+1} i = \frac{n(n+1) + 2(n+1)}{2} \]
+\[ \sum_{i=1}^{n+1} i = \frac{1}{2}(n+1)(n+2) \]
+which establishes the result.
+
+It remains to evaluate the right-hand side of the expression:
+\[ \binom{n+1}{2} = \frac{(n+1)!}{2!(n-1)!}  = \frac{1}{2}n(n+1) \]
+which was to be proved.
+
+\vspace{5mm}
+\noindent{
+\framebox {
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+\vspace{2mm}
+14. By differentiating the entropy function $H(\lambda)$, show that it achieves its maximum value at $\lambda  = 1/2$. What is $H(1/2)$?
+
+\vspace{1mm}
+\end{minipage}
+}
+}
+
+The entropy function is given by:
+\[ H(\lambda) = -\lambda \lg \lambda - (1-\lambda) \lg (1-\lambda) \]
+which we can rewrite and differentiate as follows:
+\[ H(\lambda) = (-1)\left[\lambda \lg \lambda + (1-\lambda)\lg (1-\lambda) \right] \]
+\[ H'(\lambda) = (-1)\left[\left( \lg \lambda + \frac{1}{\ln 2}\right) + \left(-\lg(1-\lambda) - \frac{1}{\ln 2}\right) \right] \]
+\[ H'(\lambda) = -\lg \left(\frac{\lambda}{1-\lambda}\right) = \lg\left(\frac{1-\lambda}{\lambda}\right)\]
+
+Setting this equal to zero to obtain the maximum, we have:
+\[ \lg\left(\frac{1 - \lambda}{\lambda} \right) = 0 \]
+\[ \frac{1 - \lambda}{\lambda} = 1 \]
+\[ 1 - \lambda = \lambda \]
+\[ 1 = 2 \lambda \]
+\[ \lambda = 1/2 \]
+
+The value of $H(1/2)$ is:
+
+\[ H(1/2) = -\frac{1}{2} \lg \left(\frac{1}{2}\right) - \left(1-\frac{1}{2}\right)\lg\left(1-\frac{1}{2}\right)\]
+\[ H(1/2) = -\frac{1}{2} \lg \left(\frac{1}{2}\right) - \frac{1}{2}\lg \left(\frac{1}{2}\right) = -\lg \left(\frac{1}{2}\right)\]
+\[ H(1/2) = 1 \]
+
+[add a plot to 14]
+
+[working]
+
+\end{document}
