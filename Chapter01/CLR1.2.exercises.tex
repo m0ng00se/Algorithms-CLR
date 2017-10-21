@@ -57,15 +57,71 @@
 
 Computation of polynomials requires multiplication and addition. Let us assume, for our model of computation, that each multiplication and addition costs a constant amount of time, $c_m$ and $c_a$ respectively. 
 
-The computation of $x^i$ is bounded from above by $\Theta(n)$  (i.e., a maximum of $n$ multiplications). There are a total $n$ such terms in the expression. Hence we should
+The computation of $x^i$ is bounded from above by $\Theta(n)$  (i.e., a maximum of $n$ multiplications, since $i < n$). There are a total $n$ such terms in the expression to be added together. Hence we should
 be able to evaluate the expression in $\Theta(n^2)$ time, in the worst case. 
 
-An example algorithm is as follows:
+An example $\Theta(n^2)$ evaluation is as follows:
 
 \begin{lstlisting}[language=Java]
 import java.util.List;
 
+public class Polynomial {
+    //! Coefficients are sorted in ascending order.
+    private List<Integer> coefficients;
+    public Polynomial(List<Integer> coefficients) {
+        this.coefficients = coefficients;
+    }
+    
+    //! Simple O(n^2) evaluation of polynomial at point 'x'.
+    public Double evaluate(Double x) {
+        Double result = 0.0;
+        int n = this.coefficients.size();
+        for (int i=0; i<n; ++i) {
+            result += this.coefficients.get(i) * exp(x, n-i-1);
+        }
+        return result;
+    }
+    
+    //! Exponential function. O(n) performance.
+    private static Double exp(Double base, Integer power) {
+        Double result = 1.0;
+        for (int i=0; i<power; ++i) {
+            result *= base;
+        }
+        return result;
+    }
+}
+
 \end{lstlisting}
+
+An example $\Theta(n)$ Horner evaluation is as follows:
+
+\begin{lstlisting}[language=Java]
+import java.util.List;
+
+public class Polynomial {
+    //! Coefficients are sorted in ascending order.
+    private List<Integer> coefficients;
+    public Polynomial(List<Integer> coefficients) {
+        this.coefficients = coefficients;
+    }
+    
+    //! Horner O(n) evaluation of polynomial at point 'x'.
+    public Double horner(Double x) {
+        Double result = 0.0;
+        if (this.coefficients.size() != 0) {
+            result = new Double(this.coefficients.get(0));
+            int n = this.coefficients.size();
+            for (int i=1; i<n; ++i) {
+                result = (result*x + this.coefficients.get(i));
+            }
+        }
+        return result;
+    }
+}    
+\end{lstlisting}
+
+Note that the Horner evaluation does not require a separate evaluation of the exponential function.
 
 \vspace{5mm}
 
@@ -111,6 +167,20 @@ we can still write $\Theta(f(n)) = n^3$.
 }
 }
 
-Working..
+For any algorithm, we can "hard-code" the right answer for known inputs. 
+
+For example, a good recursive sorting algorithm normally runs in $\Theta(n \lg n)$ time. Insertion sort, 
+studied in Section 1, runs in $\Theta(n^2)$ time. However, we can take a known input array, say 
+$<31, 41, 59, 26, 41, 58>$, and "hard-code" the correct response -- in this case $<26, 31, 41, 41, 58, 59>$.
+
+This still requires a $\Theta(n)$ operation to compare the input array with the hard-coded 
+answer, to see if they are equal. If they are, we can return the hard-coded answer. If not, we can 
+sort the array using a standard sorting algorithm. But $\Theta(n)$ is still a big improvement over $\Theta(n^2)$ or $\Theta(n \lg n)$. 
+
+Similarly, the exponential function normally requires $n$ multiplications, where $n$ is the power the base 
+is being raising to. However, we could hard-code the response to return the correct answer in the case of 
+specific inputs. Suppose we hard-code $\exp(base, power)$ to return $81$ when invoked with arguments $base=3$ and $power=4$.
+This would make $\exp(3,4)$ a $\Theta(1)$ operation. Invoking the procedure with arbitrary inputs
+would still be a $\Theta(n)$ operation, where $n$ is the size of the $power$ argument.
 
 \end{document}
