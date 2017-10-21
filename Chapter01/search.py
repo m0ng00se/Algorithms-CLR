@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-# Solution for Problem 3
+# Solution for Problem 1.3
 def search(A, v):
     j = None
     for i in range(len(A)):

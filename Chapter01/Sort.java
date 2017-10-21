@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-//! Solution for Problems 1 and 2
+//! Solution for Problems 1.1 and 1.2
 public class Sort {
     //! Sort a list in increasing order.
     public <T extends Comparable<T>> void sort(List<T> m) {
