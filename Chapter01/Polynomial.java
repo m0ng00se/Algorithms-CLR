@@ -11,7 +11,7 @@ public class Polynomial {
 	this.coefficients = coefficients;
     }
 
-    //! Simple evaluation of polynomial at point 'x'.
+    //! Simple O(n^2) evaluation of polynomial at point 'x'.
     public Double evaluate(Double x) {
 	Double result = 0.0;
 	int n = this.coefficients.size();
@@ -21,7 +21,7 @@ public class Polynomial {
 	return result;
     }
 
-    //! Horner evaluation of polynomial at point 'x'.
+    //! Horner O(n) evaluation of polynomial at point 'x'.
     public Double horner(Double x) {
 	Double result = 0.0;
 	if (this.coefficients.size() != 0) {
@@ -34,7 +34,7 @@ public class Polynomial {
 	return result;
     }
 
-    //! Exponential function.
+    //! Exponential function. O(n) performance.
     private static Double exp(Double base, Integer power) {
 	Double result = 1.0;
 	for (int i=0; i<power; ++i) {
@@ -49,26 +49,26 @@ public class Polynomial {
 	System.out.println(base + "^" + power + " = " + result);
     }
 
-    //! Unit test for simple O(n^2) evaluation.
+    //! Unit test for simple evaluation.
     private static void testEvaluate(Polynomial polynomial, Double x) {
 	Double result = polynomial.evaluate(x);
 	System.out.println("Eval: p(" + x + ") = " + result);
     }
 
-    //! Unit test for simple O(n^2) evaluation with point array.
+    //! Unit test for simple evaluation with point array.
     private static void testEvaluateWithPoints(Polynomial polynomial, List<Double> points) {
 	for (int i=0; i<points.size(); ++i) {
 	    testEvaluate(polynomial, points.get(i));
 	}
     }
 
-    //! Unit test for Horner O(n) evaluation.
+    //! Unit test for Horner evaluation.
     private static void testHorner(Polynomial polynomial, Double x) {
 	Double result = polynomial.horner(x);
 	System.out.println("Horner: p(" + x + ") = " + result);
     }
 
-    //! Unit test for Horner O(n) evaluation with point array.
+    //! Unit test for Horner evaluation with point array.
     private static void testHornerWithPoints(Polynomial polynomial, List<Double> points) {
 	for (int i=0; i<points.size(); ++i) {
 	    testHorner(polynomial, points.get(i));
