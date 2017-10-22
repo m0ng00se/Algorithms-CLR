@@ -47,6 +47,60 @@
 \framebox {
 \begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
 \vspace{2mm}
+1. Consider sorting $n$ numbers in array $A$ by first finding the smallest element of $A$ and putting it in the first entry 
+of another array $B$. Then find the second smallest element of $A$ and put it in the second entry of $B$. 
+Continue in this manner for the $n$ elements of $A$. Write pseudocode for this algorithm, which is known 
+as \textbf{selection sort}. Give the best-case and worst-case running times of selection sort in $\Theta$-notation.
+\vspace{2mm}
+\end{minipage}
+}
+}
+
+\vspace{5mm}
+
+\noindent{
+\framebox {
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+\vspace{2mm}
+2. Consider linear search again (see Exercise1.1-3). How many elements of the input sequence need to be checked on the average, 
+assuming that the element being searched for is equally likely to be any element in the array? How about the worst case? What are 
+the average-case and worst-case running times of linear search in $\Theta$-notation. Justify your answer.
+\vspace{2mm}
+\end{minipage}
+}
+}
+
+Suppose that cost to lookup an item in the list is a constant $c$. On average, supposing that the key we're looking for is in the list and
+assuming a uniform distribution, we would expect to 
+inspect half the keys in the list before finding the one we're looking for. The expected lookup time is therefore $cn/2$. Since $c/2$ is a 
+constant, this can be expressed in $\Theta$ notation as $\Theta(n)$.
+
+In the worst case, the key we are looking for is not in the list, or it is the last item in the list. In either case, we need to inspect all $n$ items 
+before terminating. The time spent searching the list is therefore $cn$. Since $c$ is a constant, this can be expressed in $\Theta$ notation as $\Theta(n)$.
+
+The expected lookup time in both the average and worst case is therefore $\Theta(n)$.
+
+\vspace{5mm}
+
+\noindent{
+\framebox {
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+\vspace{2mm}
+3. Consider the problem of determining whether an arbitrary sequence $()$ of $n$ numbers contains repeated occurrences of some number. 
+Show that this can be done in $x$ time, where $x$ stands for $x$.
+\vspace{2mm}
+\end{minipage}
+}
+}
+
+[Sorting] [working]
+
+\vspace{5mm}
+
+\noindent{
+\framebox {
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+\vspace{2mm}
 4. Consider the problem of evaluating a polynomial at a point. Given $n$ coefficients $a_0, a_1, ..., a_n$ and a real number $x$, we wish to compute $\sum_{ii=o}^{n-1}a_ix_i$. Describe a straightforward $\Theta(n^2)$-time algorithm for this problem. Describe a $\Theta(n)$-time algorithm that uses the following method (called Horner's rule) for rewriting the polynomial:
 
 \[ \sum_{i=0}^{n-1}a_ix^i = (...(a_{n-1}x + a_{n_2})x + ... + a_1)x + a_0 \]
