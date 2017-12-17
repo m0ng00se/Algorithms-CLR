@@ -72,13 +72,13 @@ the average-case and worst-case running times of linear search in $\Theta$-notat
 
 Suppose that cost to lookup an item in the list is a constant $c$. On average, supposing that the key we're looking for is in the list and
 assuming a uniform distribution, we would expect to 
-inspect half the keys in the list before finding the one we're looking for. The expected lookup time is therefore $cn/2$. Since $c/2$ is a 
+inspect half the keys in the list before finding the one we're looking for. The expected lookup time is therefore $T(n) = cn/2$. Since $c/2$ is a 
 constant, this can be expressed in $\Theta$ notation as $\Theta(n)$.
 
 In the worst case, the key we are looking for is not in the list, or it is the last item in the list. In either case, we need to inspect all $n$ items 
-before terminating. The time spent searching the list is therefore $cn$. Since $c$ is a constant, this can be expressed in $\Theta$ notation as $\Theta(n)$.
+before terminating. The time spent searching the list is therefore $T(n) = cn$. Since $c$ is a constant, this can be expressed in $\Theta$ notation as $\Theta(n)$.
 
-The expected lookup time in both the average and worst case is therefore $\Theta(n)$.
+The expected lookup time for both the average and the worst case is therefore $\Theta(n)$.
 
 \vspace{5mm}
 
