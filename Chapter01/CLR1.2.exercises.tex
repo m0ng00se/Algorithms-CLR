@@ -56,8 +56,50 @@ as \textbf{selection sort}. Give the best-case and worst-case running times of s
 }
 }
 
-\vspace{5mm}
+The problem asks to provide an out-of-place implementation of selection sort, that is, it asks to set aside  
+ $\Theta(n)$ worth of memory to hold a new array that will contain the sorted numbers. We will do this by 
+ copying the input array and performing an in-place selection sort on the copy.
+ 
+ Selection sort is much easier to implement as an in-place sort.
 
+\begin{lstlisting}[language=Java]
+import java.util.List;
+
+public class Sort {
+	/*!
+	 * Copy input array and sort the copy in-place.
+	 */
+	public <T extends Comparable<T>> List<T> sort(List<T> m) {
+		List<T> result = new ArrayList<T>(m);
+		for (int i=0; i<result.size(); ++i) {
+			//! Find the current element
+			T elem = result.get(i);
+			
+			//! Find the smallest remaining element
+			int k=i;
+			for (int j=i; j<result.size(); ++j) {
+				if (elem.compareTo(result.get(j)) > 0) {
+					elem = result.get(j); k=j;
+				}
+			}
+			
+			//! Swap the smallest element with current element
+			T tmp = result.get(i);
+			result.set(i,elem);
+			result.set(k,tmp);
+		}
+		return result;
+	}
+}
+\end{lstlisting}
+
+Selection sort runs in $T(n) = \Theta(n^2)$ time in both the best and worst case.
+
+The best case occurs when the input array is already sorted. In this case, the "swap" 
+if-block at line 17 above is never entered, but the double for-loop is still executed, and hence $T(n) = \Theta(n^2)$.
+Worst-case performance is likewise bounded from above by the $\Theta(n^2)$ double for-loop.
+
+\vspace{5mm}
 \noindent{
 \framebox {
 \begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
@@ -110,6 +152,7 @@ searched in $\Theta(n)$ linear time to see whether two adjacent elements have th
 }
 }
 
+\newpage
 Computation of polynomials requires multiplication and addition. Let us assume, for our model of computation, that each multiplication and addition costs a constant amount of time, $c_m$ and $c_a$ respectively. 
 
 The computation of $x^i$ is bounded from above by $\Theta(n)$  (i.e., a maximum of $n$ multiplications, since $i < n$). There are a total $n$ such terms in the expression to be added together. Hence we should
@@ -153,6 +196,7 @@ public class Polynomial {
 An example $\Theta(n)$ Horner evaluation is as follows -- as before, the 
 coefficients are sorted in descending order of $x^i$:
 
+\newpage
 \begin{lstlisting}[language=Java]
 import java.util.List;
 
