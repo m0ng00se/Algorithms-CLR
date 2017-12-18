@@ -96,8 +96,6 @@ Show that this can be done in $\Theta(n \lg n)$ time, where $\lg n$ stands for $
 The number sequence can be sorted in $\Theta(n \lg n)$ time using a recursive algorithm like merge sort or quicksort, and then the resulting list can be 
 searched in $\Theta(n)$ linear time to see whether two adjacent elements have the same value. The total running time would be $T(n) = \Theta(n \lg n)$.
 
-[Sorting] [working]
-
 \vspace{5mm}
 
 \noindent{
@@ -117,13 +115,14 @@ Computation of polynomials requires multiplication and addition. Let us assume, 
 The computation of $x^i$ is bounded from above by $\Theta(n)$  (i.e., a maximum of $n$ multiplications, since $i < n$). There are a total $n$ such terms in the expression to be added together. Hence we should
 be able to evaluate the expression in $\Theta(n^2)$ time, in the worst case. 
 
-An example $\Theta(n^2)$ evaluation is as follows:
+An example $\Theta(n^2)$ evaluation is as follows. Coefficients are sorted in descending order of
+$x^i$, that is, the list $(1, 2, 3)$ would represent the coefficients in the expression $P(x) = x^2 + 2x + 3$:
 
 \begin{lstlisting}[language=Java]
 import java.util.List;
 
 public class Polynomial {
-    //! Coefficients are sorted in ascending order.
+    //! Coefficients are sorted in descending order of x^i
     private List<Integer> coefficients;
     public Polynomial(List<Integer> coefficients) {
         this.coefficients = coefficients;
@@ -151,13 +150,14 @@ public class Polynomial {
 
 \end{lstlisting}
 
-An example $\Theta(n)$ Horner evaluation is as follows:
+An example $\Theta(n)$ Horner evaluation is as follows -- as before, the 
+coefficients are sorted in descending order of $x^i$:
 
 \begin{lstlisting}[language=Java]
 import java.util.List;
 
 public class Polynomial {
-    //! Coefficients are sorted in ascending order.
+    //! Coefficients are sorted in descending order of x^i.
     private List<Integer> coefficients;
     public Polynomial(List<Integer> coefficients) {
         this.coefficients = coefficients;
