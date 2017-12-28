@@ -6,7 +6,7 @@ public class Polynomial {
 
     private List<Integer> coefficients;
 
-    //! Constructor. Coefficients are sorted in ascending order.
+    //! Constructor. Coefficients are sorted in descending order of x^i.
     public Polynomial(List<Integer> coefficients) {
 	this.coefficients = coefficients;
     }
