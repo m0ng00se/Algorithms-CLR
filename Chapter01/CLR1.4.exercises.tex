@@ -1,0 +1,149 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{ amssymb }
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{color}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{highlightcolor}{rgb}{0.8, 0.9, 0.9}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+ 
+\lstset{style=mystyle}
+
+\newcommand*\Suppressnumber{%
+  \lst@AddToHook{OnNewLine}{%
+    \let\thelstnumber\relax%
+     \advance\c@lstnumber-\@ne\relax%
+    }%
+}
+
+\begin{document}
+
+\noindent{
+\framebox {
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+\vspace{2mm}
+1. Suppose we are comparing implementations of insertion sort and merge sort on 
+the same machine. For inputs of size $n$, insertion sort runs in $8n^2$ steps, while 
+merge sort runs in $64n \lg n$ steps. For which values of $n$ does insertion sort beat
+merge sort? How might one rewrite the merge sort procedure to make it 
+even faster on small inputs?
+\vspace{2mm}
+\end{minipage}
+}
+}
+
+We wish to find $n$ such that for $n > n_0$, the following inequality holds:
+\[ 8n^2 < 64n \lg n\]
+
+Defining $f(n) = 64n \lg n - 8n^2$, this is equivalent to finding values of $n$ for which 
+$f(n) > 0$. Newton's method is a useful numerical technique for calculating the roots 
+of transcendental functions like this one. Starting with an initial guess $x_0$, the 
+subsequent (hopefully better) guess is given by:
+
+\[ x_1 = x_0 - \frac{f(x_0)}{f'(x_0)} \]
+
+In this case, $f(n) = 64n \lg n - 8n^2$ and $f'(n) = 64\lg n + 64- 16n$. The following Python script calculates a numerical 
+approximation for the roots of this function using Newton's method:
+
+\begin{lstlisting}[language=Python]
+import math
+
+\end{lstlisting}
+
+Working.
+
+\vspace{5mm}
+
+\noindent{
+\framebox {
+\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+\vspace{2mm}
+2. What is the smallest value of $n$ such that an algorithm whose running time is $100n^2$ runs faster than an algorithm
+whose running time is $2^n$ on the same machine?
+\vspace{2mm}
+\end{minipage}
+}
+}
+
+We wish to find $n_0$ such that for $n > n_0$ the following inequality holds:
+\[ 100n^2 < 2^n \]
+
+Defining $f(n) = 2^n - 100n^2$, this is equivalent to finding values of $n$ for which $f(n) > 0$.
+Newton's method is a useful numerical technique for calculating the roots of transcendental functions like this one.
+Starting with an initial guess $x_0$, the subsequent (hopefully better) guess is given by:
+\[ x_1 = x_0 - \frac{f(x_0)}{f'(x_0)} \]
+
+In this case, $f(n) = 2^n - 100n^2$ and $f'(n) = (\ln 2) \cdot 2^n - 200 n$.
+The following Python script calculates a numerical approximation for the roots of this function using Newton's method:
+
+
+\begin{lstlisting}[language=Python]
+import math
+
+def newton(F, dF, x):
+    """ Return next iterative approximation. """
+    return x - F(x)/dF(x)
+    
+def F(x):
+    """ Value of 2^x - 100x^2. """
+    return math.pow(2,x) - 100*math.pow(x,2)
+    
+def dF(x):
+    """ Value of derivative of 2^x - 100x^2. """
+    return math.log(2)*math.pow(2,x) - 200*x
+    
+def find_root(F, dF, initial_guess, tolerance):
+    """ Find root using Newton's method. """
+    def guess(x0):
+        x1 = newton(F, dF, x0)
+        diff = abs(x0-x1)
+        return (x1,diff)
+
+    # Iterate until we obtain a result within tolerance                                                   
+    (x1,diff) = guess(initial_guess)
+    while (diff > tolerance):
+        (x1, diff) = guess(x1)
+    return x1
+    
+# Find the root with initial guess of 20                                                                                            
+print find_root(F, dF, 20, 0.01)
+\end{lstlisting}
+
+The script returns $14.3247$ as an approximate root, which indeed is valid:
+\[ 100 * 14 * 14 = 19,600 > 16,384 = 2^{14} \]
+\[ 100 * 15 * 15 = 22,500 < 32,768 = 2^{15} \]
+
+The answer to the question is that for $n=15$ and higher the $T(n) = 100n^2$ procedure will 
+outperform the $T(n) = 2^n$ procedure. 
+
+The problem illustrates that an exponential procedure 
+grows much more rapidly than a quadratic function, 
+and that even for $n = 15$ a very bad quadratic procedure will greatly outperform an exponential one.
+
+\end{document}

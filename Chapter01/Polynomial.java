@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-//! Solution for problem 2.4
+//! Solution for problem 1.2.4
 public class Polynomial {
 
     private List<Integer> coefficients;
