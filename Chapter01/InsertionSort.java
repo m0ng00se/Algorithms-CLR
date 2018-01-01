@@ -20,11 +20,6 @@ public class InsertionSort extends Sort {
 	}
     }
 
-    //! No implementation
-    public <T extends Comparable<T>> List<T> sortWithCopy(List<T> m) {
-	return null;
-    }
-
     //! Sort a list in reverse order.
     public <T extends Comparable<T>> void reverse(List<T> m) {
 	if (m.size() <= 1)

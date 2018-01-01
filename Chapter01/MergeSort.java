@@ -7,11 +7,6 @@ public class MergeSort extends Sort {
 
     }
 
-    //! No implementation
-    public <T extends Comparable<T>> List<T> sortWithCopy(List<T> m) {
-	return null;
-    }
-
     //! Unit tests
     public static void main(String[] args) {
 

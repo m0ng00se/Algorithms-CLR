@@ -10,9 +10,6 @@ public abstract class Sort {
     //! Override to provide in-place sort
     public abstract <T extends Comparable<T>> void sort(List<T> m);
 
-    //! Override to provide not-in-place sort
-    public abstract <T extends Comparable<T>> List<T> sortWithCopy(List<T> m);
-
     //! Return a list of n random integers
     public static List<Integer> randomInts(int size, int low, int high) {
 	Random rand = new Random();
