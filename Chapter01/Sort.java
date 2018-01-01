@@ -7,10 +7,10 @@ import java.util.Random;
  */
 public abstract class Sort {
     
-    // Override to provide in-place sort
+    //! Override to provide in-place sort
     public abstract <T extends Comparable<T>> void sort(List<T> m);
 
-    // Override to provide not-in-place sort
+    //! Override to provide not-in-place sort
     public abstract <T extends Comparable<T>> List<T> sortWithCopy(List<T> m);
 
     //! Return a list of n random integers
