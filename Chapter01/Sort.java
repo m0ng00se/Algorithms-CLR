@@ -10,7 +10,7 @@ public abstract class Sort {
     //! Override to provide in-place sort
     public abstract <T extends Comparable<T>> void sort(List<T> m);
 
-    //! Return a list of n random integers
+    //! Return a list of n random integers (for unit testing)
     public static List<Integer> randomInts(int size, int low, int high) {
 	Random rand = new Random();
         List<Integer> ints = new ArrayList<Integer>();
@@ -21,7 +21,7 @@ public abstract class Sort {
         return ints;
     }
 
-    //! Return a list of arbitary (unsorted) strings
+    //! Return a list of arbitary (unsorted) strings (for unit testing)
     public static List<String> randomStrings() {
 	List<String> strings = new ArrayList<String>();
         strings.add("one");

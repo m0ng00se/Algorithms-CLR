@@ -1,7 +1,11 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/*!
+ * Solution for Problem 1.2.1.
+ */
 public class SelectionSort extends Sort {
+    
     //! No implementation.
     public <T extends Comparable<T>> void sort(List<T> m) {
 	throw new UnsupportedOperationException();

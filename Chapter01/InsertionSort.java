@@ -6,6 +6,7 @@ import java.util.Random;
  * Solutions for Problems 1.1.1 and 1.1.2
  */
 public class InsertionSort extends Sort {
+    
     //! Sort a list in increasing order.
     public <T extends Comparable<T>> void sort(List<T> m) {
 	if (m.size() <= 1)
