@@ -30,4 +30,4 @@ def find_root(F, dF, initial_guess, tolerance):
     return x1
 
 # Find the root
-print find_root(F,dF,20,0.01)
+print find_root(F, dF, 20, 0.01)
