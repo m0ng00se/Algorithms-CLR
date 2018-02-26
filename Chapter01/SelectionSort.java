@@ -21,15 +21,21 @@ public class SelectionSort extends Sort {
 	    //! Find the smallest remaining element
 	    int k=i;
 	    for (int j=i; j<result.size(); ++j) {
+		System.out.println("Comparing: " + elem + "," + result.get(j));
 		if (elem.compareTo(result.get(j)) > 0) {
+		    System.out.println("FOUND!");
 		    elem = result.get(j); k=j;
 		}
 	    }
 
 	    //! Swap the smallest element with current element
-	    T tmp = result.get(i);
-	    result.set(i,elem);
-	    result.set(k,tmp);
+	    if (i != k) {
+		T tmp = result.get(i);
+		result.set(i,elem);
+		result.set(k,tmp);
+		System.out.println("swap!");
+	    }
+	    System.out.println("loop done");;
 	}
 	return result;
     }
@@ -41,8 +47,20 @@ public class SelectionSort extends Sort {
 	System.out.println("");
 	List<Integer> ints = randomInts(10, 1, 50);
 	System.out.println("Input:\t " + ints);
-	List<Integer> sorted = s._sort(ints);
-	System.out.println("Sort:\t " + sorted);
+	//List<Integer> sorted = s._sort(ints);
+	//System.out.println("Output:\t " + sorted);
+	System.out.println("");
+
+	List<Integer> sortedUpInts = sortedIncreasingInts(10, 1);
+	System.out.println("Input:\t " + sortedUpInts);
+	//List<Integer> sortedUpInts_sort = s._sort(sortedUpInts);
+	//System.out.println("Output:\t " + sortedUpInts_sort);
+	System.out.println("");
+
+	List<Integer> sortedDownInts = sortedDecreasingInts(10, 10);
+	System.out.println("Input:\t " + sortedDownInts);
+	List<Integer> sortedDownInts_sort = s._sort(sortedDownInts);
+	System.out.println("Output:\t " + sortedDownInts_sort);
 	System.out.println("");
     }
 }

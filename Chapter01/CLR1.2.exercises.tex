@@ -84,16 +84,66 @@ public class Sort {
 			}
 			
 			//! Swap the smallest element with current element
-			T tmp = result.get(i);
-			result.set(i,elem);
-			result.set(k,tmp);
+			if (i != k) {
+				T tmp = result.get(i);
+				result.set(i,elem);
+				result.set(k,tmp);
+			}
 		}
 		return result;
 	}
 }
 \end{lstlisting}
 
-Selection sort runs in $T(n) = \Theta(n^2)$ time in both the best and worst case.
+Selection sort uses a double-loop over all $n$ input elements, and it does not exit 
+either loop early. Consequently, we would expect selection sort to run in $T(n) = \Theta(n^2)$ time
+in both the best and worst case.
+
+We will model the cost of making a comparison (at line 16) as $C$, and the cost of writing to 
+memory (at line 17) as $D$, and the cost of making the swap (at lines 23-25) as $E$. 
+
+Suppose all $n$ input elements are already sorted in increasing order, which corresponds to the 
+best case for selection sort. In the first iteration of the 
+outer for-loop, we will make $n-1$ comparisons costing $C$ (line 16), but none of these comparisons will 
+result in finding a smaller element -- consequently neither the write costing $D$ (line 17) nor
+the swap costing $E$ (lines 23-25) are ever executed.
+
+On the second iteration through the outer for-loop we will make $n-2$ comparisons, each costing $C$, 
+with no writes costing $D$ nor any swaps costing $E$ being executed, and so on.
+
+The expected running time for the entire algorithm is therefore:
+
+\begin{equation}
+\begin{split}
+T(n) & = C(n-1) + C(n-2) + ... + C \\
+ & = C \sum_{k=1}^n k = \frac{C}{2}n(n-1) = \frac{1}{2}Cn^2 - \frac{1}{2}Cn  \\
+ & = \Theta(n^2)
+\end{split}
+\end{equation}
+
+Suppose all $n$ input elements are already sorted in reverse order, which corresponds to a worst-case
+for selection sort. 
+For example, consider:
+\[A = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1] \] 
+In the first iteration through the outer for-loop, we will perform $n-1$ comparisons each costing $C$. On each 
+comparison we will find an element smaller than $10$, causing the write costing $D$ to be executed 
+$n-1$ times. Finally the swap costing $E$ will be executed at the end of the outer for-loop, 
+causing the resultant array to look like:
+
+\[ A' = [1, 9, 8, 7, 6, 5, 4, 3, 2, 10] \]
+
+On the next iteration through the outer for-loop, we will perform $n-2$ comparisons each costing $C$. On each
+comparison, except for the last, we will find an element smaller than $9$, causing the write costing $D$ to be 
+executed $n-3$ times. Finally the swap costing $E$ will be executed at the end of the outer for-loop, 
+causing the resultant array to look like:
+
+\[ A' = [1, 2, 8, 7, 6, 5, 4, 3, 9, 10] \]
+
+This analysis reduces to the case of a sorted array once the outer for-loop has reached $k=n/2$ elements -- 
+which means we expect no further writes or swaps costing $D$ or $E$ to be executed beyond this point, although 
+we will still perform $n-k$ comparisons costing $C$ on each iteration of the outer for-loop.
+
+[working]
 
 The best case occurs when the input array is already sorted. In this case, the "swap" 
 if-block at line 17 above is never entered, but the double for-loop is still executed, and hence $T(n) = \Theta(n^2)$.
@@ -136,7 +186,8 @@ Show that this can be done in $\Theta(n \lg n)$ time, where $\lg n$ stands for $
 }
 
 The number sequence can be sorted in $\Theta(n \lg n)$ time using a recursive algorithm like merge sort or quicksort, and then the resulting list can be 
-searched in $\Theta(n)$ linear time to see whether two adjacent elements have the same value. The total running time would be $T(n) = \Theta(n \lg n)$.
+searched in $\Theta(n)$ linear time to see whether two adjacent elements have the same value. The total running time would be $T(n) = \Theta(n\lg n + n)$,  which reduces 
+to $T(n) = \Theta(n \lg n)$.
 
 \vspace{5mm}
 

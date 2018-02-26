@@ -21,6 +21,24 @@ public abstract class Sort {
         return ints;
     }
 
+    //! Return a list of sorted, increasing integers, starting at low.
+    public static List<Integer> sortedIncreasingInts(int size, int low) {
+	List<Integer> ints = new ArrayList<Integer>();
+	for (int i=0; i<size; ++i) {
+	    ints.add(low+i);
+	}
+	return ints;
+    }
+
+    //! Return a list of reverse-sorted, decreasing integers, starting at high.
+    public static List<Integer> sortedDecreasingInts(int size, int high) {
+	List<Integer> ints = new ArrayList<Integer>();
+	for (int i=0; i<size; ++i) {
+	    ints.add(high-i);
+	}
+	return ints;
+    }
+
     //! Return a list of arbitary (unsorted) strings (for unit testing)
     public static List<String> randomStrings() {
 	List<String> strings = new ArrayList<String>();

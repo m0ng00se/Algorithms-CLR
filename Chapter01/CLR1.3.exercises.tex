@@ -196,10 +196,10 @@ is detected, select the next element in sorted set and again perform a binary se
 
 Binary search runs in $\Theta(\lg n)$-time and in the worst-case scenario, this binary search needs to be performed $n$ times, which 
 gives an overall running time of $\Theta(n \lg n)$. If the sorting step takes $\Theta(n \lg n)$ and the search step takes $\Theta (n \lg n)$, the overall time performance 
-for the procedure is $T(n) = \Theta(n \lg n)$.
+for the procedure is $T(n) = \Theta(n\lg n + n\lg n) = \Theta(2n\lg n)$, which reduces to $T(n) = \Theta(n \lg n)$.
 
 Alternatively, once the set is sorted, the subsequent search can be performed in linear time by scanning the list for matches from the front and back simultaneously. 
-In this case the time performance would still be $T(n) = \Theta(n \lg n +n) = \Theta(n \lg n)$.
+In this case the time performance would still be $T(n) = \Theta(n \lg n +n)$, which reduces to $T(n) = \Theta(n \lg n)$.
 
 Working.
 
