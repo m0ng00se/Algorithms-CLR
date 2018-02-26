@@ -61,15 +61,17 @@ even faster on small inputs?
 We wish to find $n_0$ such that for $n > n_0$, the following inequality holds:
 \[ 8n^2 < 64n \lg n\]
 
-Defining $f(n) = 64n \lg n - 8n^2$, this is equivalent to finding values of $n$ for which 
-$f(n) > 0$. Newton's method is a useful numerical technique for calculating the roots 
-of transcendental functions like this one. Starting with an initial guess $x_0$, the 
-subsequent (hopefully better) guess is given by:
+If we let $f(n) = 64n \lg n - 8n^2$, we can use Newton's method to find the roots 
+of the function and in turn infer values of $n$ where $f(n) > 0$. For Newton's 
+method, if the initial guess is given by $x_0$, the subsequent (and hopefully better) 
+guess is given by:
 
 \[ x_1 = x_0 - \frac{f(x_0)}{f'(x_0)} \]
 
-In this case, $f(n) = 64n \lg n - 8n^2$ and $f'(n) = 64\lg n + 64- 16n$. The following Python script calculates a numerical 
-approximation for the roots of this function using Newton's method:
+In this case, $f(n) = 64n \lg n - 8n^2$ so that $f'(n) = 64\lg n + 64- 16n$. 
+
+The following Python script calculates a numerical 
+approximation for the roots of $f(n)$ using Newton's method:
 
 \begin{lstlisting}[language=Python]
 import math
@@ -107,10 +109,18 @@ The script returns 26.0934 as an approximate root, which indeed is valid:
 \[ 8 * 26 * 26 = 5,408 < 5,421.47 \approx 64 * 26 * \lg(26) \]
 \[ 8 * 27 * 27 = 5,832 > 5,695.21 \approx 64 * 27 * \lg(27) \]
 
-The answer to the question is that for inputs $n < 27$, insertion sort will 
+The answer to the question is that for inputs $n <= 26$, insertion sort will 
 run faster than merge sort.
 
-[Working]
+Merge sort recursively splits an input array of size $n$ into two subarrays 
+of size (roughly) $n/2$, and then merges these two subarrays back together in such 
+a way as to ensure that the combined array of size $n$ is in sorted order.
+
+A naive implementation of merge sort only terminates the recursion 
+when the input array is of size $n=1$. We can improve the performance
+of merge sort by having it instead terminate the recursion when the size 
+of the input array is $n<=26$.  Smaller input or subarrays where $n <= 26$ could 
+instead be sorted using the $T(n) = 8n^2$ insertion sort procedure.
 
 \vspace{5mm}
 
@@ -128,15 +138,18 @@ whose running time is $2^n$ on the same machine?
 We wish to find $n_0$ such that for $n > n_0$ the following inequality holds:
 \[ 100n^2 < 2^n \]
 
-Defining $f(n) = 2^n - 100n^2$, this is equivalent to finding values of $n$ for which $f(n) > 0$.
-Newton's method is a useful numerical technique for calculating the roots of transcendental functions like this one.
-Starting with an initial guess $x_0$, the subsequent (hopefully better) guess is given by:
+If we let $f(n) = 2^n - 100n^2$, we can use Newton's method to find the roots of 
+the function and in turn infer values of $n$ where $f(n) > 0$. For Newton's method, if 
+the initial guess is given by $x_0$, the subsequent (and hopefully better) guess is 
+given by:
+
 \[ x_1 = x_0 - \frac{f(x_0)}{f'(x_0)} \]
 
-In this case, $f(n) = 2^n - 100n^2$ and $f'(n) = (\ln 2) \cdot 2^n - 200 n$.
-The following Python script calculates a numerical approximation for the roots of this function using Newton's method:
+In this case, $f(n) = 2^n - 100n^2$ so that $f'(n) = (\ln 2) \cdot 2^n - 200 n$.
 
+The following Python script calculates a numerical approximation for the roots of $f(n)$ using Newton's method:
 
+\pagebreak
 \begin{lstlisting}[language=Python]
 import math
 
